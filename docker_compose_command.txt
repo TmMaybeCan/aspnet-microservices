@@ -1,0 +1,2 @@
+docker compose command:
+	docker-compose -f docker-compose.yml -f docker-compose.override.yml	up -d (for stopping containers: 'down' command after source)
