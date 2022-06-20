@@ -1,6 +1,5 @@
 ﻿using Basket.API.Entities;
-using Basket.API.Interfaces;
-using Microsoft.AspNetCore.Http;
+using Basket.API.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
