@@ -22,7 +22,7 @@ namespace Basket.API.Controllers
 		{
 			var cacheKey = "TheTime";
 			var existingTime = _distributedCache.GetString(cacheKey);
-		    _distributedCache.Remove(cacheKey);
+		    await _distributedCache.RemoveAsync(cacheKey);
 			if (!string.IsNullOrEmpty(existingTime))
 			{
 				return "Fetched from cache : " + existingTime;
@@ -30,7 +30,7 @@ namespace Basket.API.Controllers
 			else
 			{
 				existingTime = DateTime.UtcNow.ToString();
-				_distributedCache.SetString(cacheKey, existingTime);
+				await _distributedCache.SetStringAsync(cacheKey, existingTime);
 				return "Added to cache : " + existingTime;
 			}
 		}
