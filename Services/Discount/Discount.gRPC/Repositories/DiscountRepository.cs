@@ -74,5 +74,11 @@ namespace Discount.gRPC.Repositories
                 return false;
             return true;
         }
+
+        public bool CheckProductName(Coupon coupon)
+        {
+            var result = coupon.ProductName.StartsWith("No");
+            return result;
+        }
     }
 }

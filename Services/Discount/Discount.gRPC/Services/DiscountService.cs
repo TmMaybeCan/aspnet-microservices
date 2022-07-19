@@ -26,9 +26,29 @@ namespace Discount.gRPC.Services
             var coupon = await _discountRepository.GetDiscount(request.ProductName);
 
             if (coupon is null)
+            { 
                 throw new RpcException(new Status(StatusCode.NotFound, $"----->Discount with product name - {request.ProductName} is not found!"));
+            }
+
+            #region CheckProductName
+            /*
+            var checkProductName = coupon.ProductName.StartsWith("No");
+
+            var checkProductName = _discountRepository.CheckProductName(coupon);
+
+            if (checkProductName)
+            {
+                _logger.LogInformation($"----->Coupon for {request.ProductName} not found!"); //request.ProductName ??           
+            }
+            else
+            {
+                _logger.LogInformation($"----->Coupon for {coupon.ProductName} retrieved. Amount - {coupon.Amount}");
+            }
+            */
+            #endregion
 
             _logger.LogInformation($"----->Coupon for {coupon.ProductName} retrieved. Amount - {coupon.Amount}");
+
 
             var couponModel = _mapper.Map<CouponModel>(coupon);
 
