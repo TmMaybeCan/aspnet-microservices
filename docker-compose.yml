@@ -22,16 +22,24 @@ services:
   discountdb:
     image: postgres
 
-  discount.api:
-    image: ${DOCKER_REGISTRY-}discountapi
+  #discount.api:
+  #  image: ${DOCKER_REGISTRY-}discountapi
+  #  build:
+  #    context: .
+  #    dockerfile: Services/Discount/Discount.API/Dockerfile
+
+  discount.grpc:
+    image: ${DOCKER_REGISTRY-}discountgrpc
     build:
       context: .
-      dockerfile: Services/Discount/Discount.API/Dockerfile
-
+      dockerfile: Services/Discount/Discount.gRPC/Dockerfile
+  
   pgadmin:
     image: dpage/pgadmin4
     
+
 volumes:
   mongo_data: 
   postgres_data:
   pgadmin_data:
+
