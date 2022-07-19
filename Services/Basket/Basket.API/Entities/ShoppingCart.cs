@@ -9,6 +9,15 @@ namespace Basket.API.Entities
         //public string Id { get; set; }
         //public DateTime Created { get; set; }
         //public Client AddedBy { get; set; }
+
+        public ShoppingCart()
+        {
+
+        }
+        public ShoppingCart(string userName)
+        {
+            UserName = userName; 
+        }
         public decimal TotalPrice
         {
             get
@@ -20,15 +29,6 @@ namespace Basket.API.Entities
                 }
                 return totalPrice;
             }
-        }
-
-        public ShoppingCart()
-        {
-
-        }
-        public ShoppingCart(string userName)
-        {
-            UserName = userName; 
         }
 
     }
