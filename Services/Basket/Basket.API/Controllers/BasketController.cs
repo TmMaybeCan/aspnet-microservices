@@ -13,12 +13,12 @@ namespace Basket.API.Controllers
     public class BasketController : ControllerBase
     {
         private readonly IBasketRepository _basketRepository;
-        readonly private DiscountGrpcService _discountGrpcService;
+        readonly private DiscountGrpcCallerService _discountGrpcCallerService;
 
-        public BasketController(IBasketRepository basketRepository, DiscountGrpcService discountGrpcService)
+        public BasketController(IBasketRepository basketRepository, DiscountGrpcCallerService discountGrpcCallerService)
         {
             this._basketRepository = basketRepository ?? throw new ArgumentNullException(nameof(basketRepository));
-            _discountGrpcService = discountGrpcService ?? throw new ArgumentNullException(nameof(discountGrpcService));
+            _discountGrpcCallerService = discountGrpcCallerService ?? throw new ArgumentNullException(nameof(discountGrpcCallerService));
         }
 
         [HttpGet("{userName}", Name = "Get")]
@@ -36,7 +36,7 @@ namespace Basket.API.Controllers
         {
             foreach (var item in basket.Items)
             {
-                var coupon = await _discountGrpcService.GetDiscount(item.ProductName);
+                var coupon = await _discountGrpcCallerService.GetDiscount(item.ProductName);
 
                 item.Price -= coupon.Amount;
             }
@@ -45,7 +45,7 @@ namespace Basket.API.Controllers
 
             return Ok(result);  
         }
-
+        
         [HttpDelete("{userName}")]
         [ProducesResponseType(typeof(ShoppingCart), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Delete(string userName)
